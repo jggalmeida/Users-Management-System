@@ -1,0 +1,30 @@
+{
+  "name": "Users-Management-System",
+  "version": "1.0.0",
+  "description": "System to manage users of a company.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jggalmeida/Users-Management-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jggalmeida/Users-Management-System/issues"
+  },
+  "homepage": "https://github.com/jggalmeida/Users-Management-System#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.1.0",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^9.1.0",
+    "mssql": "^6.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-reverentgeek": "^3.1.1"
+  }
+}
