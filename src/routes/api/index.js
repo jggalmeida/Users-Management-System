@@ -1,7 +1,7 @@
 "use strict";
 
-const events = require( "./events" );
+const users = require( "./users" );
 
 module.exports.register = async server => {
-	await events.register( server );
+	await users.register( server );
 };

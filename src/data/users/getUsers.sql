@@ -1,5 +1,5 @@
 SELECT [Id],
-        [Password],
+        [UserId],
         [Email],
         [Name],
         [Department],

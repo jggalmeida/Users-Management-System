@@ -1,6 +1,6 @@
 "use strict";
 
-const events = require( "./events" );
+const users = require( "./users" );
 const sql = require( "mssql" );
 
 const client = async ( server, config ) => {
@@ -34,7 +34,7 @@ const client = async ( server, config ) => {
 	};
 
 	return {
-		events: await events.register( { sql, getConnection } )
+		users: await users.register( { sql, getConnection } )
 	};
 };
 
