@@ -8,8 +8,7 @@ module.exports.register = async server => {
 			try {
 				const db = request.server.plugins.sql.client;
 
-				const UserId = "admin";
-				const res = await db.users.getUsers( UserId );
+				const res = await db.users.getUsers();
 
 				return res.recordset;
 			} catch ( err ){
@@ -17,4 +16,53 @@ module.exports.register = async server => {
 			}
 		}
 	} );
+
+	server.route( {
+		method: "POST",
+		path: "/api/users",
+		handler: async request => {
+			try {
+				const db = request.server.plugins.sql.client;
+
+				const { UserId, Password, Email, Name, Department, EnteredOn, LastUpdate } = request.payload;
+				const res = await db.users.addUser( { UserId, Password, Email, Name, Department, EnteredOn, LastUpdate } );
+				return res.recordset[0];
+			} catch ( err ){
+				console.log( err );
+			}
+		}
+	} );
+
+	server.route( {
+		method: "DELETE",
+		path: "/api/users/{Id}",
+		handler: async ( request, h ) => {
+			try{
+				const Id = request.params.Id;
+				const db = request.server.plugins.sql.client;
+				const res = await db.users.deleteUser( { Id } );
+				return res.rowsAffected[0] === 1 ? h.response().code( 204 ) : h.response().code( 404 );
+			}catch ( err ){
+				console.log( err );
+			}
+		}
+	} );
+
+	server.route( {
+		method: "PUT",
+		path: "/api/users/{Id}",
+		handler: async request => {
+			try {
+				const Id = request.params.Id;
+				const db = request.server.plugins.sql.client;
+
+				const { Password, Email, Name, Department, LastUpdate } = request.payload;
+				const res = await db.users.updateUser( { Id, Password, Email, Name, Department, LastUpdate } );
+				return res.recordset[0];
+			} catch ( err ){
+				console.log( err );
+			}
+		}
+	} );
+
 };

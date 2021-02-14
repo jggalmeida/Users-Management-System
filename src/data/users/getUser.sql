@@ -7,5 +7,6 @@ SELECT [Id],
         [LastUpdate],
         [SecurityLevel]
 FROM    [dbo].[users]
+WHERE   [UserId] = @UserId
 ORDER BY
         [EnteredOn]
