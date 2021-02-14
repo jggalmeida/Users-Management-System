@@ -5,10 +5,10 @@ const utils = require( "../utils" );
 const register = async ( { sql, getConnection } ) => {
 	const sqlQueries = await utils.loadSqlQueries( "users" );
 
-	const getUser = async UserId => {
+	const getUser = async ( { Id } ) => {
 		const cnx = await getConnection();
 		const request = await cnx.request();
-		request.input( "UserId", sql.VarChar( 50 ), UserId );
+		request.input( "Id", sql.Int, Id );
 		return await request.query( sqlQueries.getUser );
 	};
 
@@ -52,12 +52,21 @@ const register = async ( { sql, getConnection } ) => {
 		return request.query( sqlQueries.deleteUser );
 	};
 
+	const authUser = async ( { UserId, Password } )	=> {
+		const cnx = await getConnection();
+		const request = await cnx.request();
+		request.input( "UserId", sql.VarChar( 50 ), UserId );
+		request.input( "Password", sql.VarChar( 50 ), Password );
+		return request.query( sqlQueries.authUser );
+	};
+
 	return {
 		addUser,
 		updateUser,
 		deleteUser,
 		getUser,
-		getUsers
+		getUsers,
+		authUser
 	};
 };
 

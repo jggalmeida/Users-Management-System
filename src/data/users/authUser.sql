@@ -6,7 +6,6 @@ SELECT [Id],
         [EnteredOn],
         [LastUpdate],
         [SecurityLevel]
-FROM    [dbo].[users]
-WHERE   [Id] = @Id
-ORDER BY
-        [EnteredOn]
+FROM [dbo].[users]
+WHERE [UserId] = @UserId
+AND [Password] = @Password;
