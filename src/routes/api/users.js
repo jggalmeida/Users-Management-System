@@ -1,5 +1,8 @@
 "use strict";
 
+const jwt = require( "jsonwebtoken" );
+//const tk = require( "../../config" );
+
 module.exports.register = async server => {
 
 	server.route( {
@@ -85,15 +88,17 @@ module.exports.register = async server => {
 
 	server.route( {
 		method: "POST",
-		path: "/api/users/auth",
-		handler: async ( request, h ) => {
+		path: "/login",
+		handler: async ( request, h  ) => {
 			try {
 				const db = request.server.plugins.sql.client;
 
 				const UserId = request.payload.UserId;
 				const Password = request.payload.Password;
 				const res = await db.users.authUser( { UserId, Password } );
-				return res.rowsAffected[0] === 1 ? res.recordset : h.response().code( 404 );
+				const token = jwt.sign( { UserId }, process.env.TOKEN_SECRET );
+				return res.rowsAffected[0] === 1 ? h.response().header( "auth-token", token ) : h.response().code( 404 );
+				//return res.rowsAffected[0] === 1 ? res.recordset : h.response().code( 404 );
 			} catch ( err ){
 				console.log( err );
 			}

@@ -14,9 +14,7 @@ const {
 	SQL_DATABASE,
 	SQL_USER,
 	SQL_PASSWORD,
-	OKTA_ORG_URL,
-	OKTA_CLIENT_ID,
-	OKTA_CLIENT_SECRET
+	TOKEN_SECRET
 } = process.env;
 
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
@@ -28,6 +26,7 @@ module.exports = {
 	port: PORT,
 	host: HOST,
 	url: HOST_URL,
+	token: TOKEN_SECRET,
 	cookiePwd: COOKIE_ENCRYPT_PWD,
 	sql: {
 		server: SQL_SERVER,
@@ -39,9 +38,4 @@ module.exports = {
 			enableArithAbort: true
 		}
 	},
-	okta: {
-		url: OKTA_ORG_URL,
-		clientID: OKTA_CLIENT_ID,
-		clientSecret: OKTA_CLIENT_SECRET
-	}
 };
