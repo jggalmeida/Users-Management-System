@@ -89,16 +89,30 @@ module.exports.register = async server => {
 	server.route( {
 		method: "POST",
 		path: "/login",
-		handler: async ( request, h  ) => {
+		handler: async ( request, h ) => {
 			try {
 				const db = request.server.plugins.sql.client;
+				request.responseType = "json";
 
 				const UserId = request.payload.UserId;
 				const Password = request.payload.Password;
 				const res = await db.users.authUser( { UserId, Password } );
 				const token = jwt.sign( { UserId }, process.env.TOKEN_SECRET );
-				return res.rowsAffected[0] === 1 ? h.response().header( "auth-token", token ) : h.response().code( 404 );
-				//return res.rowsAffected[0] === 1 ? res.recordset : h.response().code( 404 );
+
+				const { Id, User, Email, Name, Department, EnteredOn, LastUpdate, SecurityLevel } = res.recordset[0];
+				const logged = {
+					Id,
+					User,
+					Email,
+					Name,
+					Department,
+					EnteredOn,
+					LastUpdate,
+					SecurityLevel,
+					token
+				};
+				//return res.rowsAffected[0] === 1 ? h.response().header( "auth-token", token ) : h.response().code( 404 );
+				return res.rowsAffected[0] === 1 ? logged : h.response().code( 404 );
 			} catch ( err ){
 				console.log( err );
 			}
