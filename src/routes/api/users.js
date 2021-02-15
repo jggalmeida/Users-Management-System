@@ -42,8 +42,8 @@ module.exports.register = async server => {
 			try {
 				const db = request.server.plugins.sql.client;
 
-				const { UserId, Password, Email, Name, Department, EnteredOn, LastUpdate } = request.payload;
-				const res = await db.users.addUser( { UserId, Password, Email, Name, Department, EnteredOn, LastUpdate } );
+				const { UserId, Password, Email, Name, Department } = request.payload;
+				const res = await db.users.addUser( { UserId, Password, Email, Name, Department } );
 				return res.recordset[0];
 			} catch ( err ){
 				console.log( err );
@@ -74,8 +74,8 @@ module.exports.register = async server => {
 				const Id = request.params.Id;
 				const db = request.server.plugins.sql.client;
 
-				const { Password, Email, Name, Department, LastUpdate } = request.payload;
-				const res = await db.users.updateUser( { Id, Password, Email, Name, Department, LastUpdate } );
+				const { Password, Email, Name, Department } = request.payload;
+				const res = await db.users.updateUser( { Id, Password, Email, Name, Department } );
 				return res.recordset[0];
 			} catch ( err ){
 				console.log( err );
