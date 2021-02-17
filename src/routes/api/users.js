@@ -97,22 +97,32 @@ module.exports.register = async server => {
 				const UserId = request.payload.UserId;
 				const Password = request.payload.Password;
 				const res = await db.users.authUser( { UserId, Password } );
-				const token = jwt.sign( { UserId }, process.env.TOKEN_SECRET );
 
-				const { Id, User, Email, Name, Department, EnteredOn, LastUpdate, SecurityLevel } = res.recordset[0];
-				const logged = {
-					Id,
-					User,
-					Email,
-					Name,
-					Department,
-					EnteredOn,
-					LastUpdate,
-					SecurityLevel,
-					token
-				};
+				if ( res.rowsAffected[0] === 1 )
+				{
+					const token = jwt.sign( { UserId }, process.env.TOKEN_SECRET );
+
+					const { Id, User, Email, Name, Department, EnteredOn, LastUpdate, SecurityLevel } = res.recordset[0];
+					const logged = {
+						Id,
+						User,
+						Email,
+						Name,
+						Department,
+						EnteredOn,
+						LastUpdate,
+						SecurityLevel,
+						token
+					};
+					return logged;
+				}
+				else
+				{
+					return h.response().code( 404 );
+				}
+
 				//return res.rowsAffected[0] === 1 ? h.response().header( "auth-token", token ) : h.response().code( 404 );
-				return res.rowsAffected[0] === 1 ? logged : h.response().code( 404 );
+				//return res.rowsAffected[0] === 1 ? logged : h.response().code( 404 );
 			} catch ( err ){
 				console.log( err );
 			}

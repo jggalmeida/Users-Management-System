@@ -14,6 +14,15 @@ const app = async config => {
 	await plugins.register( server );
 
 	await routes.register( server );
+
+	await server.register( {
+		plugin: require( "hapi-cors" ),
+		options: {
+			origins: [ "http://localhost:3000" ],
+			methods: [ "POST, GET, PUT, DELETE, OPTIONS" ],
+		}
+	} );
+
 	return server;
 };
 
