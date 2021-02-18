@@ -118,7 +118,9 @@ module.exports.register = async server => {
 				}
 				else
 				{
-					return h.response().code( 404 );
+					const token = "";
+					return token;
+					//return h.response().code( 404 );
 				}
 
 				//return res.rowsAffected[0] === 1 ? h.response().header( "auth-token", token ) : h.response().code( 404 );

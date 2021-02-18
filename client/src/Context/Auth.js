@@ -11,19 +11,19 @@ export function AuthProvider({children}){
 
 
     async function AuthLogin(usuario, password){
-       const user = usuario.usuario;
-       const Pass = usuario.password;
+        const user = usuario.usuario;
+        const Pass = usuario.password;
         const response = await api.post('/login', {
             UserId: `${user}`,
             Password: `${Pass}`
         })
         setUsers(response.data);
-        console.log(response.status);
         if(response.status === 200){
             setToken(response.data.token);
             setTpUsuario(response.data.SecurityLevel);
             setSigned(true);
-        }else if(response.status === 204){
+        }
+        if(response.data.length === 0){
             alert("User or Password Incorrect");
         }
     }

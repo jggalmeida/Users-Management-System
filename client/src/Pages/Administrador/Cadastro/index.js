@@ -30,6 +30,7 @@ export default function Cadastro(){
       });
       if(response.status === 200){
       alert("User created succesfully");
+      history.push('/dashboard_adm')
       }
     }else{
       alert("Password Incorrect, try again");
