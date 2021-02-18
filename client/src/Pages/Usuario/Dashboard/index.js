@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../../../Services/api';
+import AuthContext from '../../../Context/Auth';
 
 import logo from '../../../Assets/logo_menor.png';
 
@@ -9,11 +10,13 @@ import {
   Logo,
   DivItens,
   BtnSeeMorePerson,
+  BtnLogOut
 
 } from './styles'
 
 
 export default function Dashboard(){
+  const { SignOut } = useContext(AuthContext);
   let history = useHistory();
   const [data, setData] = useState([]);
 
@@ -29,6 +32,9 @@ export default function Dashboard(){
   return(
     <Container>
       <Logo src={logo} />
+      <BtnLogOut onClick={() => SignOut()}>
+        LogOut
+      </BtnLogOut>
         <ul>
           {
             data.map(dados => (

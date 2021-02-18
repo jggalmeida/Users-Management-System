@@ -40,3 +40,21 @@ export const BtnSeeMorePerson = styled.button`
         background: ${darken(0.05, `#079F96`)}
     }
 `;
+
+export const BtnLogOut = styled.button`
+  border: 0;
+  height: 40px;
+  width: 10%;
+  background: #1AB67E;
+  margin-left: 50%;
+  margin-top: 2%;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFF;
+  position: absolute;
+  transition: background 0.3s;
+    &:hover{
+        background: ${darken(0.05, `#1AB67E`)}
+    }
+`;

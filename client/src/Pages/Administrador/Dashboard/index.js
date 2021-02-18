@@ -33,8 +33,10 @@ export default function Dashboard(){
   }
 
   async function removeUser(ID){
-     const response = await api.delete(`/api/users/${ID}`);
-     loadData();
+    if(window.confirm("Delete User?")){
+      const response = await api.delete(`/api/users/${ID}`);
+      loadData();
+    }
   }
 
   return(

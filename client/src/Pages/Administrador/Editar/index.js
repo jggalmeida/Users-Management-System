@@ -37,31 +37,51 @@ export default function Editar(){
 
 
   function handleSubmit({email, password, nome, departament}){
-    setEmail(data[0].Email);
+    var pass = data[0].Password;
+    var e_mail = data[0].Email;
+    var name = data[0].Name;
+    var depart = data[0].Department;
+    
+    /*setEmail(data[0].Email);
     setSenha(data[0].Password);
     setNome(data[0].Name);
-    setDepartamento(data[0].Department);
-    if(password.length !== 0 ){
-     setSenha(password)
-    }else if(email.length !== 0){
-      setEmail(email);
-      console.log(email);
-    }else if(nome.length !== 0){
-      setNome(nome);
-    }else if(departament.length !== 0){
-      setDepartamento(departament);
+    setDepartamento(data[0].Department);*/
+    console.log(email);
+    if(password.length > 0 ){
+      pass = password;
+      //setSenha(password);
+      //console.log('oi');
     }
-    AtualizaDados();
+    if(email.length > 0){
+      e_mail = email;
+      //setEmail(email);
+      //console.log(email);
+    }
+    if(nome.length > 0){
+      name = nome;
+      //setNome(nome);
+    }
+    if(departament.length > 0){
+      depart = departament;
+      //setDepartamento(departament);
+    }
+    console.log(pass);
+    AtualizaDados(pass, e_mail, name, depart);
   }
 
-  async function AtualizaDados(){
+  async function AtualizaDados(pass, e_mail, name, depart){
 
     const response = await api.put(`/api/users/${id}`, {
-      Password: `${senha}`,
-      Email: `${email}`,
-      Name: `${nome}`,
-      Department: `${departamento}`
+      Password: pass,
+      Email: e_mail,
+      Name: name,
+      Department: depart
     })
+    if(response.status === 200){
+      alert("User updated succesfully");
+      history.push('/dashboard_adm')
+
+    }
   }
   return(
     <>
@@ -72,7 +92,7 @@ export default function Editar(){
           <DivForm>
             <Form onSubmit={handleSubmit}>
               <TextInput>Password: </TextInput>
-              <Input name="password" placeholder={data[0].Password} type="password"/>
+              <Input name="password" type="password" placeholder={data[0].Password}/>
 
               <TextInput>E-mail : </TextInput>
               <Input name="email" placeholder={data[0].Email} type="email"/>

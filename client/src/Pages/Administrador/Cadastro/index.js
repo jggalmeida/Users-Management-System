@@ -29,11 +29,10 @@ export default function Cadastro(){
         Department: `${departament}`
       });
       if(response.status === 200){
-      alert("Usuário Cadastro com Sucesso!!!");
-
+      alert("User created succesfully");
       }
     }else{
-      alert("Senhas não conferem, ou dados incorretos!");
+      alert("Password Incorrect, try again");
     }
     
   }
