@@ -92,7 +92,7 @@ export default function Editar(){
           <DivForm>
             <Form onSubmit={handleSubmit}>
               <TextInput>Password: </TextInput>
-              <Input name="password" type="password" placeholder={data[0].Password}/>
+              <Input name="password" placeholder={data[0].Password} type="password"/>
 
               <TextInput>E-mail : </TextInput>
               <Input name="email" placeholder={data[0].Email} type="email"/>
